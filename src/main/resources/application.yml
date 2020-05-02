@@ -1,0 +1,66 @@
+server:
+  port: ${PORT:8080}
+  tomcat:
+    accept-count: 200
+    max-threads: 400
+
+---
+management:
+  endpoint:
+    prometheus:
+      enabled: true
+  health:
+    db:
+      enabled: true
+    diskspace:
+      enabled: true
+      threshold: 100MB
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    web:
+      client:
+        request:
+          autotime:
+            enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+---
+spring:
+  jpa:
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        generate_statistics: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/test
+    hikari:
+      auto-commit: false
+      connection-timeout: 2000
+      idle-timeout: 60000
+      max-lifetime: 180000
+      maximum-pool-size: 20
+      minimum-idle: 2
+      pool-name: example-pool
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      password: test
+      username: test
+
+---
+logging:
+  level:
+    root: INFO
+    org:
+      hibernate:
+        stat: DEBUG
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql: DEBUG
