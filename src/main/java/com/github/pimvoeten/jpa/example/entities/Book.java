@@ -24,7 +24,7 @@ public class Book {
 
     private String title;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "book_authors",
             joinColumns = {@JoinColumn(name = "books_id")},
