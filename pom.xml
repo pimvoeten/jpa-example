@@ -44,6 +44,11 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+
         <!-- Other -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -137,6 +142,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <finalName>jpa-example</finalName>
+                </configuration>
             </plugin>
         </plugins>
     </build>

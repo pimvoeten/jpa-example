@@ -1,8 +1,8 @@
 server:
   port: ${PORT:8080}
   tomcat:
-    accept-count: 200
-    max-threads: 400
+    accept-count: ${ACCEPT_THREADS:50}
+    max-threads: ${MAX_THREADS:50}
 
 ---
 management:
@@ -16,6 +16,8 @@ management:
       enabled: true
       threshold: 100MB
   metrics:
+    tags:
+      host: ${HOSTNAME:localhost}
     export:
       prometheus:
         enabled: true
@@ -30,37 +32,39 @@ management:
         include: '*'
 
 ---
+
 spring:
   jpa:
     show-sql: false
     open-in-view: false
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     properties:
       hibernate:
-        generate_statistics: true
+        generate_statistics: false
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://localhost:3306/test
+    url: ${JDBC_URL:jdbc:mysql://localhost:3306/test}
     hikari:
       auto-commit: false
-      connection-timeout: 2000
+      connection-timeout: ${CONNECTION_TIMEOUT:10000}
       idle-timeout: 60000
       max-lifetime: 180000
-      maximum-pool-size: 20
-      minimum-idle: 2
-      pool-name: example-pool
+      maximum-pool-size: ${MAX_CONN_POOL:50}
+      minimum-idle: 10
+      pool-name: ${HOSTNAME:dbPool}
       driver-class-name: com.mysql.cj.jdbc.Driver
-      password: test
-      username: test
+      password: ${DB_USER:test}
+      username: ${DB_PASS:test}
 
 ---
 logging:
   level:
     root: INFO
-    org:
-      hibernate:
-        stat: DEBUG
-        SQL: DEBUG
-        type:
-          descriptor:
-            sql: DEBUG
+#    org:
+#      hibernate:
+#        stat: DEBUG
+#        SQL: DEBUG
+#        type:
+#          descriptor:
+#            sql: DEBUG

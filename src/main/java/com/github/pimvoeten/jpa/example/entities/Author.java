@@ -10,7 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.util.Set;
 import java.util.UUID;
 
@@ -19,6 +21,9 @@ import java.util.UUID;
 @EqualsAndHashCode(exclude = {"books"})
 @ToString(exclude = {"books"})
 @Entity
+@Table(indexes = {
+        @Index(name = "uq_name", columnList = "lastName, firstName", unique = true)
+})
 public class Author {
     @Id
     @GeneratedValue(generator = "uuid2")
