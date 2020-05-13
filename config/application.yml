@@ -38,9 +38,10 @@ spring:
     show-sql: false
     open-in-view: false
     database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true
     properties:
       hibernate:
-        generate_statistics: false
+        generate_statistics: true
     hibernate:
       ddl-auto: update
   datasource:
@@ -61,10 +62,10 @@ spring:
 logging:
   level:
     root: INFO
-#    org:
-#      hibernate:
-#        stat: DEBUG
-#        SQL: DEBUG
+    org:
+      hibernate:
+        stat: DEBUG
+        SQL: DEBUG
 #        type:
 #          descriptor:
 #            sql: DEBUG

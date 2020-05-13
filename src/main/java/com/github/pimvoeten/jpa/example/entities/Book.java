@@ -34,7 +34,11 @@ public class Book {
     @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
+    @Column(length = 50, nullable = false)
     private String title;
+
+    @Column(length = 13)
+    private String isbn;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(

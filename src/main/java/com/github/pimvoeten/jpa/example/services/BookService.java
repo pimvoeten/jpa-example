@@ -59,11 +59,8 @@ public class BookService {
                 .map(author -> authorRepository.findByFirstNameAndLastName(author.getFirstName(), author.getLastName()))
                 .collect(Collectors.toSet());
 
-        Book book = new Book();
-
-        book.setTitle(newBook.getTitle());
+        final Book book = bookMapper.toEntity(newBook);
         book.setAuthors(authors);
-
         bookRepository.save(book);
 
         return Optional.of(bookMapper.fromEntityToTitle(book));

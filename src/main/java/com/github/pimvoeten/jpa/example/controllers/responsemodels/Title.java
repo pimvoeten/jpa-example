@@ -6,4 +6,5 @@ import lombok.Data;
 public class Title {
     private String id;
     private String title;
+    private String isbn;
 }

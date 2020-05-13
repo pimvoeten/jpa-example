@@ -31,7 +31,10 @@ public class Author {
     @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
+    @Column(length = 50)
     private String firstName;
+
+    @Column(length = 50)
     private String lastName;
 
     @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)

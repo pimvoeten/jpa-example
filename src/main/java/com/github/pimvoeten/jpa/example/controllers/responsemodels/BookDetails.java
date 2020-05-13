@@ -9,5 +9,6 @@ public class BookDetails {
 
     private String id;
     private String title;
+    private String isbn;
     private List<AuthorShort> authors;
 }
