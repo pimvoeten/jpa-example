@@ -14,8 +14,10 @@ import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -26,6 +28,12 @@ import java.util.UUID;
 @Table(indexes = {
         @Index(name = "uq_title", columnList = "title", unique = true)
 })
+@NamedEntityGraph(
+        name = "book-with-authors",
+        attributeNodes = {
+                @NamedAttributeNode("authors")
+        }
+)
 public class Book {
 
     @Id
@@ -46,5 +54,13 @@ public class Book {
             joinColumns = {@JoinColumn(name = "books_id")},
             inverseJoinColumns = {@JoinColumn(name = "authors_id")}
     )
-    private Set<Author> authors;
+    private List<Author> authors;
 }
+
+/**
+ * select authors0_.books_id as books_id1_2_0_, authors0_.authors_id as authors_2_2_0_, author1_.id as id1_0_1_, author1_.first_name as first_na2_0_1_, author1_.last_name as last_nam3_0_1_ from book_authors authors0_ inner join author author1_ on authors0_.authors_id=author1_.id where authors0_.books_id=?
+ * select book0_.id as id1_1_0_, book0_.isbn as isbn2_1_0_, book0_.title as title3_1_0_ from book book0_ where book0_.id=?
+ * <p>
+ * <p>
+ * select book0_.id as id1_1_0_, book0_.isbn as isbn2_1_0_, book0_.title as title3_1_0_, authors1_.books_id as books_id1_2_1_, author2_.id as authors_2_2_1_, author2_.id as id1_0_2_, author2_.first_name as first_na2_0_2_, author2_.last_name as last_nam3_0_2_ from book book0_ left outer join book_authors authors1_ on book0_.id=authors1_.books_id left outer join author author2_ on authors1_.authors_id=author2_.id where book0_.id=?
+ */

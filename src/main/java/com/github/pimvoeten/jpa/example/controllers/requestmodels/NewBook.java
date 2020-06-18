@@ -6,7 +6,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.Set;
+import java.util.List;
 
 @Value
 public class NewBook {
@@ -21,5 +21,5 @@ public class NewBook {
     @NotEmpty
     @Size(min = 1)
     @Valid
-    private Set<NewAuthor> authors;
+    private List<NewAuthor> authors;
 }

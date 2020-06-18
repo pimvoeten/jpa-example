@@ -41,7 +41,7 @@ spring:
     generate-ddl: true
     properties:
       hibernate:
-        generate_statistics: true
+        generate_statistics: false
     hibernate:
       ddl-auto: update
   datasource:
@@ -52,7 +52,7 @@ spring:
       idle-timeout: 60000
       max-lifetime: 180000
       maximum-pool-size: ${MAX_CONN_POOL:50}
-      minimum-idle: 10
+      minimum-idle: ${MIN_CONN_IDLE:10}
       pool-name: ${HOSTNAME:dbPool}
       driver-class-name: com.mysql.cj.jdbc.Driver
       password: ${DB_USER:test}

@@ -12,8 +12,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -24,6 +26,13 @@ import java.util.UUID;
 @Table(indexes = {
         @Index(name = "uq_name", columnList = "lastName, firstName", unique = true)
 })
+@NamedEntityGraph(
+        name = "author-with-books",
+        attributeNodes = {
+                @NamedAttributeNode("books")
+        }
+
+)
 public class Author {
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -38,5 +47,5 @@ public class Author {
     private String lastName;
 
     @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
-    private Set<Book> books;
+    private List<Book> books;
 }

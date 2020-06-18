@@ -27,11 +27,23 @@ public class AuthorService {
                 .map(person -> authorMapper.fromEntityToAuthor(person));
     }
 
-    @Cacheable("authors")
+//    @Cacheable("authors")
     public AuthorDetails getAuthor(UUID id) {
         return authorRepository.findById(id)
                 .map(person -> authorMapper.fromEntityToAuthorDetails(person))
                 .orElse(null);
+    }
+
+    public AuthorDetails getAuthorWithGraph(UUID id) {
+        return authorMapper.fromEntityToAuthorDetails(
+                authorRepository.findWithGraph(id, "author-with-books")
+        );
+    }
+
+    public AuthorDetails getAuthorWithAnnotatedGraph(UUID id) {
+        return authorMapper.fromEntityToAuthorDetails(
+                authorRepository.getById(id)
+        );
     }
 
     @Transactional

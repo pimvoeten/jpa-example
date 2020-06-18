@@ -29,6 +29,16 @@ public class AuthorController {
         return authorService.getAuthor(id);
     }
 
+   @GetMapping(path = "{id}/2")
+    public AuthorDetails getAuthorWithGraph(@PathVariable UUID id) {
+        return authorService.getAuthorWithGraph(id);
+    }
+
+   @GetMapping(path = "{id}/3")
+    public AuthorDetails getAuthorWithAnnotatedGraph(@PathVariable UUID id) {
+        return authorService.getAuthorWithAnnotatedGraph(id);
+    }
+
     @DeleteMapping(path = "{id}")
     public void deleteAuthor(@PathVariable UUID id) {
         authorService.deleteAuthor(id);

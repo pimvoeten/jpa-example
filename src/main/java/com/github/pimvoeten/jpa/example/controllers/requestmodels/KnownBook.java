@@ -4,7 +4,7 @@ import lombok.Value;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import java.util.Set;
+import java.util.List;
 
 @Value
 public class KnownBook {
@@ -13,5 +13,5 @@ public class KnownBook {
     private String title;
 
     @NotEmpty
-    private Set<NewAuthor> authors;
+    private List<NewAuthor> authors;
 }

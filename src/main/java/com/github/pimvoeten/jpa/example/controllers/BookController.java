@@ -54,6 +54,16 @@ public class BookController {
         return bookService.getBook(id);
     }
 
+    @GetMapping(path = "/{id}/2")
+    public BookDetails getBookDetailsJoin(@PathVariable UUID id) {
+        return bookService.getBookWithAuthors(id);
+    }
+
+    @GetMapping(path = "/{id}/3")
+    public BookDetails getBookDetailsJoinNamed(@PathVariable UUID id) {
+        return bookService.getBookWithAuthorsNamed(id);
+    }
+
     @PostMapping
     public ResponseEntity<Title> createBook(@RequestBody @Valid NewBook newBook) {
         return bookService
